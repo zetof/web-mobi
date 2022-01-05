@@ -9,7 +9,7 @@ function Knob({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, size, 
     this.x += this.group.getX();
     this.y += this.group.getY();
   }
-  this.size = size || 50;
+  this.size = size || 75;
   this.color = color || new Color(255, 255, 255);
   this.onColor = onColor || new Color(190, 190, 190);
   this.offColor = offColor || new Color(63, 63, 63);
@@ -25,7 +25,7 @@ function Knob({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, size, 
   this.mouseY = y;
   if(this.caption != ""){
     this.context.fillStyle = this.color.rgb();
-    this.context.font = "12px monospace";
+    this.context.font = "16px monospace";
     this.context.textAlign = "center";
     this.context.textBaseline = "top";
     this.context.fillText(this.caption, this.x + this.size / 2, this.y + this.size + this.lineWidth);
@@ -84,7 +84,7 @@ Knob.prototype.draw = function(){
   this.context.arc(this.x + this.size / 2 , this.y + this.size / 2, (this.size - this.knobWidth) / 2, angle - 0.1, angle + 0.1);
   this.context.stroke();
   this.context.fillStyle = this.color.rgb();
-  this.context.font = "10px monospace";
+  this.context.font = "20px monospace";
   this.context.textAlign = "center";
   this.context.textBaseline = "middle";
   this.context.fillText(this.val, this.x + this.size / 2, this.y + this.size / 2);  

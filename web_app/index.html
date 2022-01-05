@@ -25,12 +25,12 @@
       osc_1 = new OscSender({baseUrl:"192.168.1.7"});
       l_1 = new Light();
       osc_1.subscribe("/metronome", l_1.blink)  ;
-      g_1 = new Group({panel:myPanel, x:20, y:30, width:300, height:200, caption:"My Group"})
-      s_1 = new Switch({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"s_1", x:30, y:25, onColor:new Color(255, 127, 0), caption:"Switch Event", val:0});
-      p_1 = new Pad({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"p_1", x:120, y:10, onColor:new Color(0, 0, 255), caption:"Pad Event"});
-      k_1 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"k_1", x:200, y:10, onColor:new Color(0, 255, 0), caption:"Knob Event"});
-      se_1 = new Selector({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"se_1", x:45, y:100, onColor:new Color(255, 127, 0), caption:"Selector Event", array:["sin", "sqr", "saw", "tri", "ns"]});
-      t_1 = new XYTrack({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"t_1", x:140, y:80, onColor:new Color(0, 0, 255), caption:"XY Track Event"});
+      g_1 = new Group({panel:myPanel, x:20, y:30, width:355, height:310, caption:"My Group"})
+      s_1 = new Switch({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"s_1", x:35, y:25, onColor:new Color(255, 127, 0), caption:"Switch Event", val:0});
+      p_1 = new Pad({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"p_1", x:145, y:10, onColor:new Color(0, 0, 255), caption:"Pad Event"});
+      k_1 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"k_1", x:255, y:10, onColor:new Color(0, 255, 0), caption:"Knob Event"});
+      se_1 = new Selector({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"se_1", x:35, y:165, onColor:new Color(255, 127, 0), caption:"Selector Event", array:["sin", "sqr", "saw", "tri", "ns"]});
+      t_1 = new XYTrack({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"t_1", x:165, y:130, onColor:new Color(0, 0, 255), caption:"XY Track Event"});
     </script>
   </body>
 </html>

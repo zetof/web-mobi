@@ -3,9 +3,9 @@ function Panel(color) {
     color = new Color(0, 0, 0);
   }
   canvas = document.createElement('canvas');
+  canvas.style.backgroundColor = color.rgb();
   canvas.width = window.innerWidth;
   canvas.height = window.innerHeight;
-  canvas.style.backgroundColor = color.rgb();
   body = document.getElementsByTagName("body")[0];
   body.appendChild(canvas);
   this.canvas = canvas;
@@ -14,8 +14,16 @@ function Panel(color) {
 
 Panel.prototype.getCanvas = function() {
   return this.canvas;
-};
+}
 
 Panel.prototype.getContext = function() {
   return this.context;
-};
+}
+
+Panel.prototype.getWidth = function() {
+  return this.canvas.width;
+}
+
+Panel.prototype.getHeight = function() {
+  return this.canvas.height;
+}

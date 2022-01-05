@@ -9,8 +9,8 @@ function Switch({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, widt
     this.x += this.group.getX();
     this.y += this.group.getY();
   }
-  this.width = width || 50;
-  this.height = height || 25;
+  this.width = width || 76;
+  this.height = height || 38;
   this.color = color || new Color(255, 255, 255);
   this.onColor = onColor || new Color(190, 190, 190);
   this.offColor = offColor || new Color(63, 63, 63);
@@ -19,7 +19,7 @@ function Switch({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, widt
   this.lineWidth = 5;
   if(this.caption != ""){
     this.context.fillStyle = this.color.rgb();
-    this.context.font = "12px monospace";
+    this.context.font = "16px monospace";
     this.context.textAlign = "center"
     this.context.textBaseline = "top"
     this.context.fillText(this.caption, this.x + this.width / 2, this.y + this.height + this.lineWidth)    
