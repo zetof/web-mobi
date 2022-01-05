@@ -1,9 +1,10 @@
-function OscSender(baseUrl, basePort, route) {
+function OscSender({baseUrl, basePort, route}) {
 	this.baseUrl = baseUrl || "127.0.0.1";
 	this.basePort = basePort || 3061;
 	this.route = route || "/foobar";
 	this.ws = new WebSocket("ws://" + this.baseUrl + ":" + this.basePort);
 	this.pending = [];
+	this.dispatcher = [];
 	this.ws.onopen = this.wsOK.bind(this);
 	this.ws.onerror = this.wsKO.bind(this);
 	this.ws.onmessage = this.receive.bind(this);
@@ -32,6 +33,22 @@ OscSender.prototype.send = function(data) {
   }
 }
 
+OscSender.prototype.subscribe = function(route, action) {
+  this.dispatcher.push({ "route": route, "action": action });
+}
+
 OscSender.prototype.receive = function(event) {
-  console.log(event.data);
+  try {
+  	msg = JSON.parse(event.data)
+  	args =[];
+  	msg.args.forEach(element => {
+      args.push(element.value);
+  	});
+    this.dispatcher.forEach(element => {
+      if(element.route == msg.address) element.action(args);
+    });
+  }
+  catch(e) {
+    console.log(event.data);
+  }
 }

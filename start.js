@@ -37,7 +37,7 @@ wss.on('connection', function connection(ws) {
     if(parse.address == '/metronome') {
       wss.clients.forEach(function each(client) {
         if(client !== ws && client.readyState === WebSocket.OPEN) {
-          client.send('BOUM');
+          client.send(JSON.stringify(parse));
         }
       });
     }
@@ -67,4 +67,3 @@ udpPort.on('message', function (oscMsg, timeTag, info) {
 
 // Open the socket.
 udpPort.open();
-
