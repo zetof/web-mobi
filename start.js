@@ -20,11 +20,11 @@ const app = express();
 
 // Define a base address for the starting page of the appplication
 app.get('/', (req, res) => {
-  res.sendFile('./web_mobi/index.html', { root: __dirname });
+  res.sendFile('./web_app/index.html', { root: __dirname });
 });
 
 // Serve javascript pages of the application
-app.use(express.static('web_mobi'));
+app.use(express.static('web_app'));
 
 // Start web server for frontend application
 app.listen(web_app_port, () => console.log(`Your mobi controller is available  on port ${web_app_port}`));
