@@ -9,7 +9,7 @@ function Selector({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, si
     this.x += this.group.getX();
     this.y += this.group.getY();
   }
-  this.size = size || 75;
+  this.size = size || 80;
   this.color = color || new Color(255, 255, 255);
   this.onColor = onColor || new Color(190, 190, 190);
   this.offColor = offColor || new Color(63, 63, 63);

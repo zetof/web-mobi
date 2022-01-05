@@ -33,8 +33,8 @@ OscSender.prototype.send = function(data) {
   }
 }
 
-OscSender.prototype.subscribe = function(route, action) {
-  this.dispatcher.push({ "route": route, "action": action });
+OscSender.prototype.subscribe = function(route, object, action) {
+  this.dispatcher.push({ "route": route, "action": action.bind(object) });
 }
 
 OscSender.prototype.receive = function(event) {
