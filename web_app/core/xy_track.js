@@ -1,4 +1,4 @@
-function XYTrack({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, size, color, onColor, offColor, min, max, decimal, val, caption}) {
+function XYTrack({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, size, color, offColor, min, max, decimal, val, caption}) {
   this.context = panel.getContext();
   this.group = group || null;
   this.oscSender = oscSender;
@@ -11,12 +11,12 @@ function XYTrack({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, siz
   }
   this.size = size || 150;
   this.color = color || new Color(255, 255, 255);
-  this.onColor = onColor || new Color(190, 190, 190);
   this.offColor = offColor || new Color(63, 63, 63);
   this.min = min || [0, 0];
   this.max = max || [127, 127];
   this.decimal = decimal || false;
   this.val = val || [63, 63];
+  if(this.decimal) this.val = [1 * this.val[0].toFixed(2), 1 * this.val[1].toFixed(2)];
   this.caption = caption || "";
   this.lineWidth = 5;
   this.thinLineWidth = 2;
@@ -39,16 +39,16 @@ function XYTrack({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, siz
 
 XYTrack.prototype.computePos = function() {
   x = (this.val[0] - this.min[0]) / (this.max[0] - this.min[0]);
-  y = (this.val[1] - this.min[1]) / (this.max[1] - this.min[1]);
+  y = (this.max[1] - this.val[1]) / (this.max[1] - this.min[1]);
   return [x, y];
 }
 
 XYTrack.prototype.computeVal = function() {
   valX = this.min[0] + this.pos[0] * (this.max[0] - this.min[0]);
-  valY = this.min[1] + this.pos[1] * (this.max[1] - this.min[1]);
+  valY = this.max[1] - this.pos[1] * (this.max[1] - this.min[1]);
   if(this.decimal) {
-    valX = valX.toFixed(2);
-    valY = valY.toFixed(2);
+    valX = 1 * valX.toFixed(2);
+    valY = 1 * valY.toFixed(2);
   } 
   else {
     valX = Math.round(valX);
@@ -60,8 +60,8 @@ XYTrack.prototype.computeVal = function() {
 XYTrack.prototype.setVal = function(val) {
   if(val[0] >= this.min[0] && val[0] <= this.max[0] && val[1] >= this.min[1] && val[1] <= this.max[1]) {
     if(this.decimal) {
-      valX = valX.toFixed(2);
-      valY = valY.toFixed(2);
+      valX = 1 * valX.toFixed(2) * 1;
+      valY = 1 * valY.toFixed(2) * 1;
     } 
     else {
       valX = Math.round(valX);
@@ -81,7 +81,7 @@ XYTrack.prototype.draw = function() {
   }
   this.context.lineWidth = this.lineWidth;
   this.context.strokeStyle = this.color.rgb();
-  this.context.fillStyle = this.val == 1?this.onColor.rgb():this.offColor.rgb();
+  this.context.fillStyle = this.offColor.rgb();
   this.context.beginPath();
   this.context.moveTo(this.x + this.cornerSize, this.y);
   this.context.lineTo(this.x + this.size - this.cornerSize, this.y);

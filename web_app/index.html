@@ -22,15 +22,60 @@
     <script>
       myPanel = new Panel();
       ed_1 = new EventsDispatcher(myPanel);
-      osc_1 = new OscSender({baseUrl:"192.168.1.7"});
-      g_1 = new Group({panel:myPanel, x:20, y:30, width:420, height:320, caption:"My Group"})
-      l_1 = new Light({panel:myPanel, group:g_1, x:370, y:270, onColor:new Color(255, 30, 0)});
-      osc_1.subscribe("/metronome", l_1, l_1.blink)  ;
-      s_1 = new Switch({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"s_1", x:35, y:30, onColor:new Color(255, 127, 0), caption:"Switch Event", val:0});
-      p_1 = new Pad({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"p_1", x:145, y:10, onColor:new Color(0, 0, 255), caption:"Pad Event"});
-      k_1 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"k_1", x:255, y:10, onColor:new Color(0, 255, 0), caption:"Knob Event"});
-      se_1 = new Selector({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"se_1", x:35, y:170, onColor:new Color(255, 127, 0), caption:"Selector Event", array:["sin", "sqr", "saw", "tri", "ns"]});
-      t_1 = new XYTrack({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"t_1", x:165, y:130, onColor:new Color(0, 0, 255), caption:"XY Track Event"});
+      osc_1 = new OscSender({baseUrl:"192.168.1.7", route:"/control"});
+
+      // Definition of colors
+      c_on_1 = new Color(255,215,0);
+      c_on_2 = new Color(220, 20, 60);
+      c_on_3 = new Color(255, 140, 0);
+      c_on_4 = new Color(50, 205, 50);
+      c_led_on = new Color(255, 69, 0);
+
+
+      // Definition of groups
+      g_1 = new Group({panel:myPanel, x:20, y:30, width:400, height:430, caption:"OSC 1"})
+      g_2 = new Group({panel:myPanel, x:860, y:30, width:400, height:430, caption:"OSC 2"})
+      g_3 = new Group({panel:myPanel, x:440, y:30, width:400, height:430, caption:"MASTER"})
+      g_4 = new Group({panel:myPanel, x:20, y:490, width:1240, height:120, caption:"EFFECTS"})      
+
+      // OSC 1 controls
+      t_11 = new XYTrack({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"atck_dcay_1", x:110, y:20, size:180, min:[0.05, 0.1], max:[1, 5], val:[0.05, 1], decimal:true, caption:"ATTACK/DECAY"});
+      k_11 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"pitch_1", x:40, y:230, min:36, max:84, val:48, onColor:c_on_1, caption:"PITCH"});
+      k_12 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"dtn_1", x:50, y:340, size:60, min:-0.05, max:0.05, val:0, decimal:true, onColor:c_on_1, caption:"DETUNE"});
+      k_13 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"wav_frm_1", x:160, y:230, min:1, max:50, val:1, onColor:c_on_1, caption:"WAVEFORM"});
+      k_14 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"duty_1", x:170, y:340, size:60, min:0.01, max:0.5, val:0.5, decimal:true, onColor:c_on_1, caption:"DUTY"});
+      k_15 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"sld_1", x:280, y:230, min:0, max:0.5, val:0, decimal:true, onColor:c_on_1, caption:"SLIDE"});
+      k_16 = new Knob({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"sld_dec_1", x:290, y:340, size: 60, min:0, max:1, val:0, decimal:true, onColor:c_on_1, caption:"DECAY"});
+      s_11 = new Switch({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"osc_1_on_off", x:25, y:20, width:60, height:30, onColor:c_on_1, caption:"ON/OFF", val:0});
+      l_11 = new Light({panel:myPanel, group:g_1, x:325, y:20, onColor:c_led_on});
+      osc_1.subscribe("/beat_1", l_11, l_11.blink);
+
+      // OSC 2 controls
+      t_21 = new XYTrack({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"atck_dcay_2", x:110, y:20, size:180, min:[0.05, 0.1], max:[1, 5], val:[0.05, 1], decimal:true, caption:"ATTACK/DECAY"});
+      k_21 = new Knob({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"pitch_2", x:40, y:230, min:36, max:84, val:60, onColor:c_on_2, caption:"PITCH"});
+      k_22 = new Knob({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"dtn_2", x:50, y:340, size: 60, min:-0.05, max:0.05, val:0, decimal:true, onColor:c_on_2, caption:"DETUNE"});
+      k_23 = new Knob({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"wav_frm_2", x:160, y:230, min:1, max:50, val:1, onColor:c_on_2, caption:"WAVEFORM"});
+      k_24 = new Knob({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"duty_2", x:170, y:340, size:60, min:0.01, max:0.5, val:0.5, decimal:true, onColor:c_on_2, caption:"DUTY"});
+      k_25 = new Knob({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"sld_2", x:280, y:230, min:0, max:0.5, val:0, decimal:true, onColor:c_on_2, caption:"SLIDE"});
+      k_26 = new Knob({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"sld_dec_2", x:290, y:340, size: 60, min:0, max:1, val:0, decimal:true, onColor:c_on_2, caption:"DECAY"});
+      s_21 = new Switch({panel:myPanel, group:g_2, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"osc_2_on_off", x:25, y:20, width:60, height:30, onColor:c_on_2, caption:"ON/OFF", val:0});
+      l_21 = new Light({panel:myPanel, group:g_2, x:325, y:20, onColor:c_led_on});
+      osc_1.subscribe("/beat_2", l_21, l_21.blink);
+
+      // MASTER controls
+      t_31 = new XYTrack({panel:myPanel, group:g_3, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"fm_fdbk", x:110, y:20, size:180, min:[0, 0], max:[100, 100], val:[0, 0], caption:"FM FEEDBACK"});
+      k_31 = new Knob({panel:myPanel, group:g_3, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"mstr_vol", x:90, y:230, min:0, max:1, val:0.5, decimal:true, onColor:c_on_3, caption:"MASTER VOL"});
+      k_32 = new Knob({panel:myPanel, group:g_3, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"mstr_tempo", x:260, y:285, min:0.5, max:5, val:1, decimal:true, onColor:c_on_3, caption:"MASTER TEMPO"});
+      k_33 = new Knob({panel:myPanel, group:g_3, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"vol_1", x:50, y:340, size:60, min:0, max:1, val:0.5,  decimal:true, onColor:c_on_3, caption:"VOL 1"});
+      k_34 = new Knob({panel:myPanel, group:g_3, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"vol_2", x:150, y:340, size:60, min:0, max:1, val:0.5, decimal:true, onColor:c_on_3, caption:"VOL 2"});
+      s_31 = new Switch({panel:myPanel, group:g_3, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"mster_on_off", x:25, y:20, width:60, height:30, onColor:c_on_3, caption:"ON/OFF", val:0});
+
+      // EFFECTS controls
+      k_41 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"delay", x:20, y:15, min:0, max:0.5, val:0, decimal:true, onColor:c_on_4, caption:"DELAY"});
+      k_42 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"decay", x:120, y:15, min:0, max:5, val:0, decimal:true, onColor:c_on_4, caption:"DECAY"});
+      k_43 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"low_pass", x:220, y:15, min:10, max:10000, val:10, onColor:c_on_4, caption:"LOW"});
+      k_44 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"high_pass", x:320, y:15, min:10, max:10000, val:10000, onColor:c_on_4, caption:"HIGH"});
+
     </script>
   </body>
 </html>

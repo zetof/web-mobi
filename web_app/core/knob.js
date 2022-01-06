@@ -17,7 +17,7 @@ function Knob({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, size, 
   this.max = max || 127;
   this.decimal = decimal || false;
   this.val = val || 0;
-  if(this.decimal) this.val = this.val.toFixed(2);
+  if(this.decimal) this.val = 1 * this.val.toFixed(2);
   this.pos = this.computePos();
   this.caption = caption || "";
   this.lineWidth = 5;
@@ -43,15 +43,15 @@ Knob.prototype.computePos = function() {
 
 Knob.prototype.computeVal = function() {
   val = this.min + this.pos * (this.max - this.min);
-  if(this.decimal) val = val.toFixed(2);
-  else val = Math.round(val);
+  if(this.decimal) val = 1 * val.toFixed(2);
+  else val = 1 * Math.round(val);
   return val;
 }
 
 Knob.prototype.setVal = function(val) {
   if(val >= this.min && val <= this.max) {
-    if(this.decimal) this.val = val.toFixed(2);
-    else this.val = Math.round(val);
+    if(this.decimal) this.val = 1 * val.toFixed(2);
+    else this.val = 1 * Math.round(val);
     this.pos = this.computePos();
     this.draw();
   }
@@ -84,7 +84,7 @@ Knob.prototype.draw = function(){
   this.context.arc(this.x + this.size / 2 , this.y + this.size / 2, (this.size - this.knobWidth) / 2, angle - 0.1, angle + 0.1);
   this.context.stroke();
   this.context.fillStyle = this.color.rgb();
-  this.context.font = "20px monospace";
+  this.context.font = "16px monospace";
   this.context.textAlign = "center";
   this.context.textBaseline = "middle";
   this.context.fillText(this.val, this.x + this.size / 2, this.y + this.size / 2);  

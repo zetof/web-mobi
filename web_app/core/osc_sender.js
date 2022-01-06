@@ -25,8 +25,11 @@ OscSender.prototype.send = function(data) {
   if(this.ws.readyState !== 1) this.pending.push(data)
   else {
   	formattedData = [];
-  	data.forEach(function(value) { 
-      formattedData.push({ "type": "s", "value": String(value) });
+  	data.forEach(function(value) {
+  		valueType = typeof value;
+  		if(valueType == "string") type = "s";
+  		else if(valueType == "number") type = "f";
+      formattedData.push({ "type": type, "value": value });
   	})
 	  msg = { address:this.route, args:formattedData };
 	  this.ws.send(JSON.stringify(msg));
