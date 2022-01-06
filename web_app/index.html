@@ -31,7 +31,6 @@
       c_on_4 = new Color(50, 205, 50);
       c_led_on = new Color(255, 69, 0);
 
-
       // Definition of groups
       g_1 = new Group({panel:myPanel, x:20, y:30, width:400, height:430, caption:"OSC 1"})
       g_2 = new Group({panel:myPanel, x:860, y:30, width:400, height:430, caption:"OSC 2"})
@@ -75,7 +74,6 @@
       k_42 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"decay", x:120, y:15, min:0, max:5, val:0, decimal:true, onColor:c_on_4, caption:"DECAY"});
       k_43 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"low_pass", x:220, y:15, min:10, max:10000, val:10, onColor:c_on_4, caption:"LOW"});
       k_44 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"high_pass", x:320, y:15, min:10, max:10000, val:10000, onColor:c_on_4, caption:"HIGH"});
-
     </script>
   </body>
 </html>
