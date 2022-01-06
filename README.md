@@ -93,7 +93,7 @@ This requires no more code than the following:
 ## Installing and operating
 
 - Clone this repository: `git clone https://github.com/zetof/web-mobi.git`
-- Move too the cloned directory: `cd web-mobi`
+- Move to the cloned directory: `cd web-mobi`
 - Install de dependencies: `npm install`
 - Run the application: `node start`
 
