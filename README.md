@@ -89,3 +89,42 @@ This requires no more code than the following:
   </body>
 </html>
 ```
+
+## Installing and operating
+
+- Clone this repository: `git clone https://github.com/zetof/web-mobi.git`
+- Move too the cloned directory: `cd web-mobi`
+- Install de dependencies: `npm install`
+- Run the application: `node start`
+
+Open a web browser and navigate to the default address: http://localhost:3000 and you should be able to see the controller interface
+
+## Configuration
+
+Everything should pretty be working out of the box. However, here are some parameters you might have to change:
+
+### `start.js` file
+
+```javascript
+const web_app_port = 3000;
+const ws_server_ip = "127.0.0.1";
+const ws_server_port = 3061;
+const osc_client_ip = "127.0.0.1";
+const osc_client_port = 57120;
+const osc_server_port = 57121;
+```
+
+- `web_app_port`: if you want the web application to be served on another port than 3000, change this value
+- `osc_client_ip`: if the OSC device you're wanting to pilot is not on your local machine, change this value
+- `osc_client_port`: if the OSC device you're wanting to pilot is not listening on this port, change this value
+- `osc_server_port`: if you want to listen to incoming OSC messages on another port, change this value
+
+### `index.html` file
+
+```javascript
+osc_1 = new OscSender({baseUrl:"127.0.0.1", route:"/control"});
+```
+
+- If you're accessing the web application from another device than your server, it is wise to change the `baseUrl` value to your server ip address otherwise you won't be able to talk to the OSC websocket gateway
+
+The OSC gateway uses websockets to communicate with the web browser and forwards / reads OSC UDP websocket messages. It has been tested using SuperCollider (see SC test program in this project).
