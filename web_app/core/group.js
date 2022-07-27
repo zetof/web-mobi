@@ -31,9 +31,9 @@ Group.prototype.draw = function(){
     if(this.caption != ""){
     this.context.fillStyle = this.color.rgb();
     this.context.font = "16px monospace";
-    this.context.textAlign = "left";
+    this.context.textAlign = "center";
     this.context.textBaseline = "bottom";
-    this.context.fillText(this.caption, this.x + 10, this.y - this.lineWidth);
+    this.context.fillText(this.caption, this.x + this.width / 2, this.y - this.lineWidth);
   }
 }
 

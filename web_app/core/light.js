@@ -16,7 +16,7 @@ function Light({panel, group, x, y, size, color, onColor, offColor, caption}) {
   this.lineWidth = 5;
   if(this.caption != ""){
     this.context.fillStyle = this.color.rgb();
-    this.context.font = "16px monospace";
+    this.context.font = "14px monospace";
     this.context.textAlign = "center";
     this.context.textBaseline = "top";
     this.context.fillText(this.caption, this.x + this.size / 2, this.y + this.size + this.lineWidth);
