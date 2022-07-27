@@ -31,6 +31,10 @@ EventsDispatcher.prototype.addEvent = function(eventType, boundaries, callback, 
   return eventIndex;
 }
 
+EventsDispatcher.prototype.resetEvents = function() {
+  this.eventsArray = [];
+}
+
 EventsDispatcher.prototype.dispatchMouseDownEvents = function(e) {
   if(e.type == "touchstart") {
     e.preventDefault();

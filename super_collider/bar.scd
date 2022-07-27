@@ -175,7 +175,6 @@ Pbind(
 // All knobs controls, split into bank effects (see LPD8 python program for more explanations)
 OSCdef.new(\control, {
 	arg msg;
-	msg.postln;
 	if(msg[1] == 'pitch_1', { ~note[0] = msg[2] });
 	if(msg[1] == 'wav_frm_1', { ~harmonics[0] = msg[2] });
 	if(msg[1] == 'atck_dcay_1', { ~attack[0] = msg[2] });
@@ -204,7 +203,7 @@ OSCdef.new(\control, {
 	if(msg[1] == 'osc_2_on_off' && msg[2] == 1, { ~play[1] = true; if(~play[2], {~osc[1].play}); });
 	if(msg[1] == 'mster_on_off' && msg[2] == 0, { ~play[2] = false; ~osc[0].stop; ~osc[1].stop; });
 	if(msg[1] == 'mster_on_off' && msg[2] == 1, { ~play[2] = true; if(~play[0], {~osc[0].play}); if(~play[1], {~osc[1].play}); });
-	if(msg[1] == 'delay', { ~delay = msg[2]; ~delay_synth.set(\delay, ~delay) });
+	if(msg[1] == 'delay', { ~delay = msg[2]; ~delay_synth.set(\delay, ~delay.lag(1)) });
 	if(msg[1] == 'decay', { ~decay = msg[2]; ~delay_synth.set(\decay, ~decay) });
 	if(msg[1] == 'low_pass', { ~low_freq = msg[2]; ~delay_synth.set(\low_freq, ~low_freq) });
 	if(msg[1] == 'high_pass', { ~high_freq = msg[2]; ~delay_synth.set(\high_freq, ~high_freq) });

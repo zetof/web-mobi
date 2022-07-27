@@ -16,6 +16,7 @@
     <script type="text/javascript" src="core/knob.js"></script>
     <script type="text/javascript" src="core/selector.js"></script>
     <script type="text/javascript" src="core/xy_track.js"></script>
+    <script type="text/javascript" src="core/v_slider.js"></script>
     <script type="text/javascript" src="core/light.js"></script>
   </head>
   <body>
@@ -32,10 +33,11 @@
       c_led_on = new Color(255, 69, 0);
 
       // Definition of groups
-      g_1 = new Group({panel:myPanel, x:20, y:30, width:400, height:430, caption:"OSC 1"})
-      g_2 = new Group({panel:myPanel, x:860, y:30, width:400, height:430, caption:"OSC 2"})
-      g_3 = new Group({panel:myPanel, x:440, y:30, width:400, height:430, caption:"MASTER"})
-      g_4 = new Group({panel:myPanel, x:20, y:490, width:1240, height:120, caption:"EFFECTS"})      
+      g_1 = new Group({panel:myPanel, x:20, y:30, width:400, height:430, caption:"OSC 1"});
+      g_2 = new Group({panel:myPanel, x:860, y:30, width:400, height:430, caption:"OSC 2"});
+      g_3 = new Group({panel:myPanel, x:440, y:30, width:400, height:430, caption:"MASTER"});
+      g_4 = new Group({panel:myPanel, x:20, y:490, width:1240, height:120, caption:"EFFECTS"});
+      g_5 = new Group({panel:myPanel, x:20, y:640, width:200, height:290, caption:"EXTRAS"});  
 
       // OSC 1 controls
       t_11 = new XYTrack({panel:myPanel, group:g_1, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"atck_dcay_1", x:110, y:20, size:180, min:[0.05, 0.1], max:[1, 5], val:[0.05, 1], decimal:true, caption:"ATTACK/DECAY"});
@@ -74,6 +76,10 @@
       k_42 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"decay", x:120, y:15, min:0, max:5, val:0, decimal:true, onColor:c_on_4, caption:"DECAY"});
       k_43 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"low_pass", x:220, y:15, min:10, max:10000, val:10, onColor:c_on_4, caption:"LOW"});
       k_44 = new Knob({panel:myPanel, group:g_4, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"high_pass", x:320, y:15, min:10, max:10000, val:10000, onColor:c_on_4, caption:"HIGH"});
+
+      // Extra controls
+      vs_1 = new Vslider({panel:myPanel, group:g_5, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"extra_1", x:35, y:20, min:-100, max:100, val:5, onColor:c_on_3, caption:"SLIDER"});
+      sel_1 = new Selector({panel:myPanel, group:g_5, eventsDispatcher:ed_1, oscSender:osc_1, oscLabel:"extra_1", x:90, y:20, min:-100, max:100, array:["sin", "sqr", "tri"], index:1, onColor:c_on_3, caption:"SELECTOR"});
     </script>
   </body>
 </html>

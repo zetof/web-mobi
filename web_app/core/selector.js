@@ -64,7 +64,7 @@ Selector.prototype.draw = function() {
     this.context.stroke();
   }
   this.context.fillStyle = this.color.rgb();
-  this.context.font = "20px monospace";
+  this.context.font = "10px monospace";
   this.context.textAlign = "center";
   this.context.textBaseline = "middle";
   this.context.fillText(this.array[this.index], this.x + this.size / 2, this.y + this.size / 2);  

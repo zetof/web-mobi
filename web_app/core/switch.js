@@ -9,7 +9,7 @@ function Switch({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, widt
     this.x += this.group.getX();
     this.y += this.group.getY();
   }
-  this.width = width || 80;
+  this.width = width || 150;
   this.height = height || 40;
   this.color = color || new Color(255, 255, 255);
   this.onColor = onColor || new Color(190, 190, 190);

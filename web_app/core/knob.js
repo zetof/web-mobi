@@ -84,7 +84,7 @@ Knob.prototype.draw = function(){
   this.context.arc(this.x + this.size / 2 , this.y + this.size / 2, (this.size - this.knobWidth) / 2, angle - 0.1, angle + 0.1);
   this.context.stroke();
   this.context.fillStyle = this.color.rgb();
-  this.context.font = "16px monospace";
+  this.context.font = "10px monospace";
   this.context.textAlign = "center";
   this.context.textBaseline = "middle";
   this.context.fillText(this.val, this.x + this.size / 2, this.y + this.size / 2);  
