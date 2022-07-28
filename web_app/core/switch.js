@@ -1,4 +1,4 @@
-function Switch({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, width, height, color, onColor, offColor, val, caption}) {
+function Switch({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, width, height, color, onColor, offColor, val, caption, labels}) {
   this.context = panel.getContext();
   this.group = group || null;
   this.oscSender = oscSender;
@@ -16,13 +16,24 @@ function Switch({panel, group, eventsDispatcher, oscSender, oscLabel, x, y, widt
   this.offColor = offColor || new Color(63, 63, 63);
   this.val = val || 0;
   this.caption = caption || "";
+  this.labels = labels || [];
+  if(this.labels.length > 0){
+    this.onColor = this.offColor;
+    this.context.fillStyle = this.color.rgb();
+    this.context.font = "14px monospace";
+    this.context.textBaseline = "middle"
+    this.context.textAlign = "right"
+    this.context.fillText(this.labels[0], this.x - this.height / 2, this.y + this.height / 2);
+    this.context.textAlign = "left"
+    this.context.fillText(this.labels[1], this.x + this.width + this.height / 2, this.y + this.height / 2);
+  }
   this.lineWidth = 5;
   if(this.caption != ""){
     this.context.fillStyle = this.color.rgb();
     this.context.font = "14px monospace";
     this.context.textAlign = "center"
     this.context.textBaseline = "top"
-    this.context.fillText(this.caption, this.x + this.width / 2, this.y + this.height + this.lineWidth)    
+    this.context.fillText(this.caption, this.x + this.width / 2, this.y + this.height + this.lineWidth);
   }
   eventsDispatcher.addEvent(Event.MOUSE_DOWN, new Boundaries(Boundaries.RECT, this.x, this.y, this.width, this.height), this.switchState.bind(this))
   this.oscSender.send([this.oscLabel, this.val])
