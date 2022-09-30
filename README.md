@@ -4,7 +4,7 @@
 
 Build with ease complex OSC controllers that are available as a web application in any modern browser. A typical example looks like this:
 
-![boing!](https://github.com/zetof/web-mobi/blob/main/images/web_mobi.png)
+![web-mobi!](https://github.com/zetof/web-mobi/blob/main/images/web_mobi.png)
 
 This requires no more code than the following:
 
